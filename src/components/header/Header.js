@@ -1,7 +1,8 @@
 import React from 'react'
 
 import './Header.scss'
-import SwipeableTemporaryDrawer from "./appDrawers/SwipeableTemporaryDrawer";
+// import SwipeableTemporaryDrawer from "./appDrawers/SwipeableTemporaryDrawer";
+import Button from "@material-ui/core/Button";
 
 const header = (props) => {
     return (
@@ -9,11 +10,12 @@ const header = (props) => {
 
             {/*<SwipeableTemporaryDrawer/>*/}
 
+
             <h1>Welcome To React App</h1>
 
-            <button style={{color: 'red', fontWeight: 'bold'}} onClick={props.toggleClicked}>Toggle Person</button>
-            <button onClick={() => props.updateClicked('Sadhan Sarker!!')}>Update Person</button>
-            <button onClick={props.clicked}>Restore Person</button>
+            <Button variant="contained" style={{color: 'red', fontWeight: 'bold', margin: 5}} onClick={props.toggleClicked}>Toggle Person</Button>
+            <Button variant="contained" color="primary"  style={{margin: 5}} onClick={() => props.updateClicked('Sadhan Sarker!!')}>Update Person</Button>
+            <Button variant="contained" color="secondary" style={{margin: 5}} onClick={props.clicked}>Restore Person</Button>
 
         </div>
     )
