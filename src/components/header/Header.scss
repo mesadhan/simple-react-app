@@ -1,0 +1,9 @@
+
+@import "../../style";          // import scss root style
+
+.TopHeader {
+    background: $primaryColor; // using scss color variable
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    padding-bottom: 16px;
+}

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import './App.css';
-import '../components/person/Person.css'
+import './App.scss';
+import '../components/person/Persons.scss'
 import Persons from "../components/person/Persons";
 import Header from "../components/header/Header";
-
+import AppTopBar from "../components/header/appTopBar/AppTopBar";
 
 class App extends Component {
 
@@ -83,13 +83,18 @@ class App extends Component {
 
 
         return (
+
             <div className="App">
+                <AppTopBar/>
+
                 <Header
                     clicked={this.restoreHandler}
                     toggleClicked={this.togglePersonHandler}
                     updateClicked={this.updateHandler}
                 />
                 {persons}
+
+
 
             </div>
 

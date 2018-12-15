@@ -48,3 +48,26 @@ npm i eslint-plugin-react --save
 
 https://www.npmjs.com/package/eslint-plugin-react
 https://github.com/yannickcr/eslint-plugin-react#recommended
+
+
+# material UI config
+-- first install
+
+ npm install @material-ui/core --save
+ npm install --save material-ui-icons
+ 
+ then go to public index.html then add 
+ 
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+ then finally 
+ 
+import ReactDOM from 'react-dom';
+import Button from '@material-ui/core/Button';
+
+Reference Guidelines:
+https://material-ui.com/getting-started/usage/
+
+ 
