@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-//import Template from './Template';
-import Person from '../components/person/Person'
 import '../components/person/Person.css'
-import ErrorBoundary from "../components/error-catch/ErrorBoundary";
+import Persons from "../components/person/Persons";
 
 
 class App extends Component {
@@ -14,7 +12,7 @@ class App extends Component {
             {id: '2', name: 'Manu', age: 29},
             {id: '3', name: 'Sadhan', age: 23}
         ],
-        showPersons: false,
+        showPersons: true,
         vipPerson: {id: 10, name: 'Manu', age: 29}
     };
 
@@ -49,7 +47,7 @@ class App extends Component {
     };
 
 
-    nameChangedHandler = ( event, id ) => {
+    nameChangedHandler = (event, id) => {
         const personIndex = this.state.persons.findIndex(p => {
             return p.id === id;
         });
@@ -61,39 +59,29 @@ class App extends Component {
         person.name = event.target.value;
         const persons = [...this.state.persons];
         persons[personIndex] = person;
-        this.setState( {persons: persons} );
+        this.setState({persons: persons});
     };
 
 
-    deletePersonHandler(personIndex) {
-        //const persons = this.state.persons.slice();
+    deletePersonHandler = ( personIndex ) => {
+        // const persons = this.state.persons.slice();
         const persons = [...this.state.persons];
+        persons.splice( personIndex, 1 );
+        this.setState( { persons: persons } );
+    };
 
-        persons.splice(personIndex, 1);
-        this.setState({persons: persons})
-    }
 
     render() {
 
         let persons = null;
-        if (this.state.showPersons) {
-            persons = (
-                <div className="">
-                    {this.state.persons.map((person, index) => {
-                        return (
-                            <ErrorBoundary>
-                                <div className="VIP_Person" key={person.id}>
-                                    <Person name={person.name}
-                                            changed={(event) => this.nameChangedHandler(event, person.id)}
-                                            click={() => this.deletePersonHandler(index, person.id)}    //  click={this.deletePersonHandler.bind(this, index)}
-                                            age={person.age}/>
-                                </div>
-                            </ErrorBoundary>
-                        )
-                    })}
-                </div>
-            )
+
+        if ( this.state.showPersons ) {
+            persons = <Persons
+                persons={this.state.persons}
+                clicked={this.deletePersonHandler}
+                changed={this.nameChangedHandler} />;
         }
+
 
 
         return (
