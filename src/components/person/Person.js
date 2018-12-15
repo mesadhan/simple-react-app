@@ -1,5 +1,5 @@
 import React from 'react'
-import '../person/Person.css'
+import './Person.css'
 
 let style = {
     color: 'red',
