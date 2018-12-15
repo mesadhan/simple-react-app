@@ -29,7 +29,7 @@ const person = (props) => {
 
                     <TextField
                         id="outlined-with-placeholder"
-                        label="With placeholder"
+                        label="Enter Person Name"
                         placeholder="Placeholder"
                         variant="outlined"
                         onChange={props.changed} defaultValue={props.name}

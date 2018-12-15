@@ -26,7 +26,9 @@ const appTopBar = (props) => {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar variant="dense">
-                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                    <IconButton
+                        onClick={props.toggleDrawerClicked('leftSideBar', true)}
+                        className={classes.menuButton} color="inherit" aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" color="inherit">Monster Shop</Typography>

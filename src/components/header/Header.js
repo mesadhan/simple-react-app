@@ -1,7 +1,6 @@
 import React from 'react'
 
 import './Header.scss'
-// import SwipeableTemporaryDrawer from "./appDrawers/SwipeableTemporaryDrawer";
 import Button from "@material-ui/core/Button";
 
 const header = (props) => {

@@ -4,7 +4,21 @@ import './App.scss';
 import Header from "../components/header/Header";
 import Persons from "../components/person/Persons";
 import AppTopBar from "../components/header/appTopBar/AppTopBar";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import PropTypes from "prop-types";
+import {withStyles} from "@material-ui/core";
+import MenuIcon from '@material-ui/icons/Menu';
 
+const styles = {
+    list: {
+        width: 250,
+    }
+};
 
 class App extends Component {
 
@@ -15,6 +29,11 @@ class App extends Component {
             {id: '3', name: 'Sadhan', age: 23}
         ],
         showPersons: true,
+        leftSideBar: false
+    };
+
+    toggleDrawer = (side, openSideBar) => () => {
+        this.setState({leftSideBar: openSideBar} );
     };
 
 
@@ -72,9 +91,9 @@ class App extends Component {
 
 
     render() {
+        const { classes } = this.props;
 
         let persons = null;
-
         if (this.state.showPersons) {
             persons = <Persons
                 persons={this.state.persons}
@@ -83,10 +102,53 @@ class App extends Component {
         }
 
 
-        return (
+        const sideList = (
+            <div className={classes.list}>
+                <List>
+                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                        <ListItem button key={text}>
+                            <ListItemIcon>{index % 2 === 0 ? <MenuIcon /> : <MenuIcon />}</ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider />
+                <List>
+                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                        <ListItem button key={text}>
+                            <ListItemIcon>{index % 2 === 0 ? <MenuIcon /> : <MenuIcon />}</ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List>
+            </div>
+        );
 
+
+
+        return (
             <div className="App">
-                <AppTopBar/>
+
+                <div>
+                    {/*<Button onClick={this.toggleDrawer('leftSideBar', true)}>Open Left</Button>*/}
+                    <SwipeableDrawer
+                        open={this.state.leftSideBar}
+                        onClose={this.toggleDrawer('leftSideBar', false)}
+                        onOpen={this.toggleDrawer('leftSideBar', true)}>
+                        <div
+                            tabIndex={0}
+                            role="button"
+                            onClick={this.toggleDrawer('leftSideBar', false)}
+                            onKeyDown={this.toggleDrawer('leftSideBar', false)}>
+                            {sideList}
+                        </div>
+                    </SwipeableDrawer>
+                </div>
+
+
+                <AppTopBar
+                    toggleDrawerClicked={this.toggleDrawer}
+                />
 
                 <Header
                     toggleClicked={this.togglePersonHandler}
@@ -96,7 +158,6 @@ class App extends Component {
                 {persons}
 
             </div>
-
         )
 
         //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App'))
@@ -104,4 +165,9 @@ class App extends Component {
     }
 }
 
-export default App;
+App.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+
+export default withStyles(styles)(App);
