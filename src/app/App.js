@@ -48,10 +48,19 @@ class App extends Component {
     };
 
 
-    nameChangeHandler = (event, id) => {
-        this.setState({
-            vipPerson: {id: id, name: event.target.value, age: 29}
-        })
+    nameChangedHandler = ( event, id ) => {
+        const personIndex = this.state.persons.findIndex(p => {
+            return p.id === id;
+        });
+
+        const person = {
+            ...this.state.persons[personIndex]
+        };
+
+        person.name = event.target.value;
+        const persons = [...this.state.persons];
+        persons[personIndex] = person;
+        this.setState( {persons: persons} );
     };
 
 
@@ -71,11 +80,11 @@ class App extends Component {
                 <div className="">
                     {this.state.persons.map((person, index) => {
                         return (
-                            <div className="Person">
+                            <div className="VIP_Person" key={person.id}>
                                 <Person name={person.name}
+                                        changed={(event) => this.nameChangedHandler(event, person.id)}
                                         click={() => this.deletePersonHandler(index, person.id)}    //  click={this.deletePersonHandler.bind(this, index)}
-                                        age={person.age}
-                                        key={person.id}/>
+                                        age={person.age}/>
                             </div>
                         )
                     })}
@@ -94,18 +103,6 @@ class App extends Component {
 
 
                 {persons}
-
-                <div className="VIP_Person">
-                    <Person name={this.state.vipPerson.name}
-                            age={this.state.vipPerson.age}
-                            click={this.updateHandler.bind(this, 'Max!')}
-                            key={11}
-                            changed={this.nameChangeHandler}>
-                        <div className="">
-                            My Hobbies: Racing, Gaming
-                        </div>
-                    </Person>
-                </div>
 
 
             </div>
