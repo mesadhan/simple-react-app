@@ -2,17 +2,19 @@ import React, {Component} from 'react';
 import './App.css';
 //import Template from './Template';
 import Person from '../person/Person'
+import '../person/Person.css'
 
 
 class App extends Component {
 
     state = {
         persons: [
-            {name: 'Max', age: 30},
-            {name: 'Manu', age: 29},
-            {name: 'Sadhan', age: 23}
+            {id: '1', name: 'Max', age: 30},
+            {id: '2', name: 'Manu', age: 29},
+            {id: '3', name: 'Sadhan', age: 23}
         ],
-        showPersons: true
+        showPersons: false,
+        vipPerson: {id: 10, name: 'Manu', age: 29}
     };
 
 
@@ -21,9 +23,9 @@ class App extends Component {
         // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
         this.setState({
             persons: [
-                {name: 'sadhan', age: 28},
-                {name: 'Manu', age: 29},
-                {name: 'Stephanie', age: 27}
+                {id: '1', name: 'sadhan', age: 28},
+                {id: '2', name: 'Manu', age: 29},
+                {id: '3', name: 'Stephanie', age: 27}
             ]
         })
     };
@@ -31,9 +33,9 @@ class App extends Component {
     updateHandler = (name) => {
         this.setState({
             persons: [
-                {name: name, age: 28},
-                {name: 'Manu', age: 29},
-                {name: 'Stephanie', age: 27}
+                {id: '1', name: name, age: 28},
+                {id: '2', name: 'Manu', age: 29},
+                {id: '3', name: 'Stephanie', age: 27}
             ]
         })
     };
@@ -46,36 +48,39 @@ class App extends Component {
     };
 
 
-    nameChangeHandler = (event) => {
+    nameChangeHandler = (event, id) => {
         this.setState({
-            persons: [
-                {name: 'Max', age: 30},
-                {name: event.target.value, age: 23},
-                {name: 'Sadhan', age: 23}
-            ]
+            vipPerson: {id: id, name: event.target.value, age: 29}
         })
     };
 
+
+    deletePersonHandler(personIndex) {
+        //const persons = this.state.persons.slice();
+        const persons = [...this.state.persons];
+
+        persons.splice(personIndex, 1);
+        this.setState({persons: persons})
+    }
+
     render() {
 
-        let person = null;
+        let persons = null;
         if (this.state.showPersons) {
-            person = <div>
-                <Person name={this.state.persons[0].name}
-                        age={this.state.persons[0].age}/>
-
-                <Person name={this.state.persons[1].name}
-                        age={this.state.persons[1].age}
-                        click={this.updateHandler.bind(this, 'Max!')}
-                        changed={this.nameChangeHandler}>
-                    <div className="">
-                        My Hobbies: Racing, Gaming
-                    </div>
-                </Person>
-
-                <Person name={this.state.persons[2].name}
-                        age={this.state.persons[2].age}/>
-            </div>
+            persons = (
+                <div className="">
+                    {this.state.persons.map((person, index) => {
+                        return (
+                            <div className="Person">
+                                <Person name={person.name}
+                                        click={() => this.deletePersonHandler(index, person.id)}    //  click={this.deletePersonHandler.bind(this, index)}
+                                        age={person.age}
+                                        key={person.id}/>
+                            </div>
+                        )
+                    })}
+                </div>
+            )
         }
 
 
@@ -88,7 +93,20 @@ class App extends Component {
                 <button onClick={() => this.updateHandler('Maximilian!!')}>Update Person</button>
 
 
-                {person}
+                {persons}
+
+                <div className="VIP_Person">
+                    <Person name={this.state.vipPerson.name}
+                            age={this.state.vipPerson.age}
+                            click={this.updateHandler.bind(this, 'Max!')}
+                            key={11}
+                            changed={this.nameChangeHandler}>
+                        <div className="">
+                            My Hobbies: Racing, Gaming
+                        </div>
+                    </Person>
+                </div>
+
 
             </div>
         );
