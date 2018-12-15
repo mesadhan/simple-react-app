@@ -12,12 +12,19 @@ import Divider from "@material-ui/core/Divider";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import PropTypes from "prop-types";
 import {withStyles} from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
+import Avatar from "@material-ui/core/Avatar";
 
 const styles = {
     list: {
         width: 250,
-    }
+    },
+    avatar: {
+        margin: 5,
+    },
+    orangeAvatar: {
+        color: '#fff',
+        backgroundColor: "#006699",
+    },
 };
 
 class App extends Component {
@@ -33,7 +40,7 @@ class App extends Component {
     };
 
     toggleDrawer = (side, openSideBar) => () => {
-        this.setState({leftSideBar: openSideBar} );
+        this.setState({leftSideBar: openSideBar});
     };
 
 
@@ -91,7 +98,7 @@ class App extends Component {
 
 
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
 
         let persons = null;
         if (this.state.showPersons) {
@@ -104,20 +111,15 @@ class App extends Component {
 
         const sideList = (
             <div className={classes.list}>
-                <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <MenuIcon /> : <MenuIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
+                <div>
+                    <h5>Monster Shop Fronted</h5>
+                </div>
+                <Divider/>
                 <List>
                     {['All mail', 'Trash', 'Spam'].map((text, index) => (
                         <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <MenuIcon /> : <MenuIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemIcon>{index % 2 === 0 ? <Avatar className={classes.orangeAvatar}>N</Avatar>  : <Avatar className={classes.orangeAvatar}>N</Avatar> }</ListItemIcon>
+                            <ListItemText primary={text}/>
                         </ListItem>
                     ))}
                 </List>
@@ -125,10 +127,11 @@ class App extends Component {
         );
 
 
-
         return (
             <div className="App">
 
+
+                {/* todo::// need to refactor using with stateless function*/}
                 <div>
                     {/*<Button onClick={this.toggleDrawer('leftSideBar', true)}>Open Left</Button>*/}
                     <SwipeableDrawer
@@ -171,3 +174,6 @@ App.propTypes = {
 
 
 export default withStyles(styles)(App);
+
+
+//  https://stackoverflow.com/questions/46024021/open-nested-menu-in-main-menu-material-ui-react
