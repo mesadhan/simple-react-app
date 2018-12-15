@@ -53,8 +53,9 @@ https://github.com/yannickcr/eslint-plugin-react#recommended
 # material UI config
 -- first install
 
- npm install @material-ui/core --save
- npm install --save material-ui-icons
+npm install @material-ui/core --save
+npm install @material-ui/icons --save
+
  
  then go to public index.html then add 
  
@@ -69,5 +70,7 @@ import Button from '@material-ui/core/Button';
 
 Reference Guidelines:
 https://material-ui.com/getting-started/usage/
+
+
 
  
