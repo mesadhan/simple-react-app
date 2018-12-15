@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+
 import './App.scss';
-import '../components/person/Persons.scss'
-import Persons from "../components/person/Persons";
 import Header from "../components/header/Header";
+import Persons from "../components/person/Persons";
 import AppTopBar from "../components/header/appTopBar/AppTopBar";
+
 
 class App extends Component {
 
@@ -88,13 +89,11 @@ class App extends Component {
                 <AppTopBar/>
 
                 <Header
-                    clicked={this.restoreHandler}
                     toggleClicked={this.togglePersonHandler}
                     updateClicked={this.updateHandler}
+                    clicked={this.restoreHandler}
                 />
                 {persons}
-
-
 
             </div>
 

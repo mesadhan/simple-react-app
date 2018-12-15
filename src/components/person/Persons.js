@@ -1,6 +1,7 @@
 import React from 'react'
 import ErrorBoundary from "../error-catch/ErrorBoundary";
 import Person from "./Person";
+import "./Person.scss";
 
 
 const persons = (props) =>  props.persons.map((person, index) => {
