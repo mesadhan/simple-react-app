@@ -98,12 +98,13 @@ class App extends Component {
                 <h1>Hi, I'm a React App</h1>
                 <p>This is really working!</p>
                 <button onClick={this.clickHandler}>Click Person</button>
-                <button onClick={this.togglePersonHandler}>Toggle Person</button>
+                <button style={{color: 'red', fontWeight: 'bold'}} onClick={this.togglePersonHandler}>Toggle Person</button>
                 <button onClick={() => this.updateHandler('Maximilian!!')}>Update Person</button>
 
 
                 {persons}
 
+                <h1>Welcome To React App</h1>
 
             </div>
         );
